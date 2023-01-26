@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*Para fazer aceesso externos a outras APIs*/
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
