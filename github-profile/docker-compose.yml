@@ -1,0 +1,48 @@
+version: "3.7"
+services:
+  app:
+    build:
+      args:
+        user: gen
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    container_name: github-profile-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    ports:
+      - "9002:9000"
+    networks:
+      - github-profile
+
+  postgres:
+    container_name: github-profile-postgres
+    image: postgres:9.6
+    environment:
+      POSTGRES_USER: ghpostgres
+      POSTGRES_PASSWORD: ghpassword
+      POSTGRES_DB: ghpostgres
+    volumes:
+      - ./storage/database:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - github-profile
+
+  nginx:
+    image: nginx:alpine
+    container_name: github-profile-nginx
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - github-profile
+
+networks:
+  github-profile:
+    driver: bridge
