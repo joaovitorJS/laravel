@@ -55,6 +55,10 @@ Route::prefix('/users')->group(function () {
     }->name('users.tags'););
 }); 
 ```
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6e35596 (feat: concluindo curso)
 Exemplo de rota onde retorna o usuário de acordo com o campo de busca desejado
 ```php
 Route::get('users/{user:id}', function (\App\Models\User $user) {
@@ -62,4 +66,16 @@ Route::get('users/{user:id}', function (\App\Models\User $user) {
 });
 ```
 
+<<<<<<< HEAD
+=======
+**Debug SQL**
+
+Mostra a query em SQL inteira
+```php
+\DB::connection()->enableQueryLog();
+$business = Business::where('name', 'LIKE', '%jon%')->get();
+$query = \DB::getQueryLog();
+dd($query);
+```
+>>>>>>> 6e35596 (feat: concluindo curso)
 
