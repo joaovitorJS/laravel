@@ -1,0 +1,11 @@
+#!/bin/bash
+
+VAR=$@
+
+if [ -z "$VAR" ]
+then
+# Sobe o container docker por padrão
+	./vendor/bin/sail up -d
+else
+    ./vendor/bin/sail $VAR
+fi
