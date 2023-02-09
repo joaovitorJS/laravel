@@ -1,0 +1,11 @@
+#!/bin/bash
+
+VAR=$@
+
+if [ -z "$VAR" ]
+then
+# Lista os comandos artisan por padrão
+	./vendor/bin/sail php artisan
+else
+    ./vendor/bin/sail php artisan $VAR
+fi
