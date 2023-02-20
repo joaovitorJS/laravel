@@ -1,23 +1,25 @@
 import {FormEvent, useEffect, useState} from "react";
-import {Link, useForm} from '@inertiajs/react';
+import {Link, router, usePage} from '@inertiajs/react';
 import loginImg from '../../images/login.png';
 import {AiOutlineExclamationCircle} from "react-icons/ai";
 import {FiCheck, FiEye, FiEyeOff} from "react-icons/fi";
 import * as Checkbox from '@radix-ui/react-checkbox';
+import clsx from "clsx";
 
-export default function Home() {
-    const { data, setData, post, processing, errors, reset } = useForm({
+export default function Home(props) {
+    const [data, setData] = useState({
         email: '',
         password: '',
         remember_me: false,
     });
     const [showPassword, setShowPassword] = useState<boolean>(false);
+    const { errors, user } = usePage().props
 
     useEffect(() => {
-        return () => {
-            reset('password');
-        };
-    }, []);
+        if (user) {
+            router.get(route('dashboard'))
+        }
+    }, [user])
 
     /**
      * Alterna o valor do estado dos dados do formulário
@@ -29,11 +31,18 @@ export default function Home() {
      */
     const handleChangeInputs = (event, name=null) => {
         if (name) { /*Checkbox input*/
-            setData(name, event);
+            setData(values => ({
+                ...values,
+                [name]: event,
+            }));
             return;
         }
-        setData(event.target.name,  event.target.value);
+        setData(values => ({
+            ...values,
+            [event.target.name]: event.target.value,
+        }));
     };
+
 
     /**
      * Trocar entre mostrar ou não mostrar senha
@@ -49,7 +58,8 @@ export default function Home() {
     const handleSubmitLogin = (event: FormEvent) => {
         event.preventDefault();
 
-        post(route('login'));
+        router.post(route('login', data));
+
     };
 
     return (
@@ -65,8 +75,30 @@ export default function Home() {
                 <main className="flex-1 flex justify-center items-center px-8">
                     <div  className="w-full sm:w-[416px]">
                         <h2>Fazer login</h2>
+                        <form onSubmit={handleSubmitLogin} className="flex flex-col mt-11 w-full" noValidate={true}>
 
-                        <form onSubmit={handleSubmitLogin} className="flex flex-col mt-11 w-full">
+                            {
+                                props.errors && (
+                                    <div className="flex flex-col space-y-1 w-full items-center mb-4">
+
+                                        {
+                                            Object.keys(errors).map((error) => {
+                                                return  (
+                                                    <div
+                                                        className={clsx("bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative w-full", (error?.[error]) && 'hidden')}
+                                                        role="alert"
+                                                        key={error}
+                                                    >
+                                                        <span
+                                                            className="block sm:inline">{errors?.[error]}</span>
+                                                    </div>
+                                                );
+                                            })
+                                        }
+
+                                    </div>
+                                )
+                            }
 
                             <div className="flex flex-col w-full border border-shapes rounded-[10px] overflow-hidden">
 
@@ -153,7 +185,12 @@ export default function Home() {
                                 <Link href="/" className="text-textComplement text-base font-heebo">Esqueci minha senha</Link>
                             </div>
 
-                            <button className="mt-8 h-[72px] font-heebo font-medium bg-orange text-lg text-white rounded-[10px] transition-all hover:brightness-[0.90]" type="submit">Acessar plataforma</button>
+                            <button
+                                className="mt-8 h-[72px] font-heebo font-medium bg-orange text-lg text-white rounded-[10px] transition-all hover:brightness-[0.90]"
+                                type="submit"
+                            >
+                                Acessar plataforma
+                            </button>
                         </form>
 
                         <div className="flex space-x-6 items-center mt-20">
