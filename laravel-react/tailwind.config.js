@@ -22,6 +22,7 @@ module.exports = {
             colors:  {
                 'background': '#F5F8FA',
                 'blueDark': '#123952',
+                'blueButton': '#115D8C',
                 'shapes': '#DCE2E5',
                 'textColor': '#617480',
                 'textComplement': '#A0ACB2',
