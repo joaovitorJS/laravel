@@ -25,9 +25,13 @@ module.exports = {
                 'shapes': '#DCE2E5',
                 'textColor': '#617480',
                 'textComplement': '#A0ACB2',
+                'textTitle': '#123952',
                 'orange': '#F25D27',
                 'orangeLow': '#FFA585',
                 'green': '#51B853',
+            },
+            backgroundImage: {
+                'gradient-green': 'linear-gradient(90deg, rgba(245,255,245,1) 0%, rgba(220,245,221,0) 100%)'
             }
         },
     },

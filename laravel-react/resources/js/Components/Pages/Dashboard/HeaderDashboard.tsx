@@ -6,7 +6,7 @@ export function HeaderDashboard() {
                 <h1>Cidades</h1>
 
                 <Link
-                    href={route('home')}
+                    href={route('cities.index')}
                     className="flex items-center justify-center py-3 px-8 bg-green text-white font-heebo font-medium text-base transition-all hover:brightness-[.95] rounded-[10px]"
                 >
                     +

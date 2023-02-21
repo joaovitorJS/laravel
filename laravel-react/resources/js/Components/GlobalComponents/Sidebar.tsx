@@ -9,23 +9,27 @@ interface NavigationLinkProps {
     id: number;
     href: string;
     icon:  JSX.Element;
+    activeLink?: Array<string>;
 }
 
 const navigationLinks: NavigationLinkProps[] = [
     {
         id: 1,
         href: "dashboard",
-        icon: <MapPin size={24} />
+        icon: <MapPin size={24} />,
+        activeLink: ["Dashboard", "City/CityCreate"]
     },
     {
         id: 2,
         href: "categories",
-        icon: <SquaresFour size={24} />
+        icon: <SquaresFour size={24} />,
+        activeLink: []
     },
     {
         id: 3,
         href: "comments",
-        icon: <Chat size={24} />
+        icon: <Chat size={24} />,
+        activeLink: []
     }
 ]
 
@@ -41,10 +45,10 @@ export function Sidebar() {
             <div className="flex flex-col space-y-10">
                 {
                     navigationLinks.map(link => {
-                        console.log()
+                        const activeLink = link.activeLink?.includes(component);
                         return (
                           <Link href={link.href} key={link.id}>
-                              {React.cloneElement(link.icon as any, {className: clsx((component.toLowerCase() !== link.href) && 'text-orangeLow transition-all hover:text-white', (component.toLowerCase() === link.href) && 'text-white')})}
+                              {React.cloneElement(link.icon as any, {className: clsx(!activeLink && 'text-orangeLow transition-all hover:text-white', activeLink && 'text-white')})}
                           </Link>
                         );
                     })
