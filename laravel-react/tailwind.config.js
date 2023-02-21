@@ -26,6 +26,7 @@ module.exports = {
                 'textColor': '#617480',
                 'textComplement': '#A0ACB2',
                 'orange': '#F25D27',
+                'orangeLow': '#FFA585',
                 'green': '#51B853',
             }
         },
