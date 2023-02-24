@@ -9,7 +9,7 @@ interface CityDataFormProps {
 export function CityDataForm({onNextCurrentFrom}: CityDataFormProps) {
     return (
         <main className="flex justify-center flex-1">
-            <form className="mt-12 mb-20 pb-12 border border-shapes rounded-2xl bg-white max-w-7xl flex flex-col w-full overflow-hidden" encType="multtipart/form-data">
+            <form className="mt-12 mb-20 pb-12 border border-shapes rounded-2xl bg-white max-w-[798px]  flex flex-col w-full overflow-hidden" encType="multtipart/form-data">
                 <HeadForm number="01" title="Adicione uma cidade" />
 
                 <fieldset className="w-full px-16 mt-12">

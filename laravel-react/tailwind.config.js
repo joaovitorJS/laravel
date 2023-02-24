@@ -30,9 +30,11 @@ module.exports = {
                 'orange': '#F25D27',
                 'orangeLow': '#FFA585',
                 'green': '#51B853',
+                'greenLow': '#DCF5DD',
             },
             backgroundImage: {
-                'gradient-green': 'linear-gradient(90deg, rgba(245,255,245,1) 0%, rgba(220,245,221,0) 100%)'
+                'gradient-green': 'linear-gradient(90deg, rgba(245,255,245,1) 0%, rgba(220,245,221,0) 100%)',
+                'gradient-blue': 'linear-gradient(90deg, rgba(255,248,245,1) 0%, rgba(245,248,250,1) 100%)',
             }
         },
     },
